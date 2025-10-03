@@ -10,18 +10,18 @@
     * { box-sizing: border-box; }
     body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
     h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); margin: 0; }
-    aside { width: 16rem; flex-shrink: 0; height: 100vh; display: flex; flex-direction: column; background: rgba(255,255,255,0.95); padding: 1rem; overflow-y: auto; }
-    nav { flex: 1; }
+    .container { display: flex; height: 100vh; }
+    aside { width: 16rem; flex-shrink: 0; height: 100vh; display: flex; flex-direction: column; background: rgba(255,255,255,0.95); padding: 1rem; overflow: hidden; }
+    nav { flex: 1; overflow-y: auto; }
     .sidebar-title { font-size: 1.25rem; font-weight: 600; color: rgb(12,37,124); margin-top: 1rem; margin-bottom: 0.25rem; }
     .sidebar-item { display: flex; flex-direction: column; }
     .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; background: transparent; border: none; }
     .sidebar-button:hover { background-color: #e0e7ff; }
-    .sidebar-item ul { display: none; flex-direction: column; padding-left: 1rem; margin: 0; }
-    .sidebar-item.active > ul { display: flex; }
+    .sidebar-item ul { max-height: 0; overflow: hidden; flex-direction: column; padding-left: 1rem; margin: 0; transition: max-height 0.3s ease; }
+    .sidebar-item.active > ul { max-height: 500px; } /* valor grande o suficiente para conter o submenu */
     .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: rgb(12,37,124); text-decoration: none; }
     .sidebar-link:hover { background-color: #f1f5f9; }
     main { flex: 1; padding: 1.5rem; overflow-y: auto; }
-    .container { display: flex; height: 100vh; }
   </style>
 </head>
 <body>
@@ -72,9 +72,9 @@
   </aside>
 
   <main>
-    <header class="mb-6">
-      <h1 class="text-3xl font-bold">Portal de Aulas</h1>
-      <p class="text-slate-600">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>
+    <header style="margin-bottom:1.5rem;">
+      <h1 style="font-size:2rem; font-weight:600; margin-bottom:0.5rem;">Portal de Aulas</h1>
+      <p style="color:#475569;">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>
     </header>
     <section id="conteudo">
       <div style="padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
@@ -114,11 +114,11 @@
   document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      const type = link.dataset.type;
-      const src = link.dataset.src;
+      const src = link.getAttribute('href');
+      const type = src.endsWith('.pdf') ? 'pdf' : 'html';
       const title = link.textContent;
       if(type === 'pdf') window.open(src, '_blank');
-      else if(type === 'html'){
+      else {
         fetch(src).then(res => res.text()).then(html => {
           document.getElementById('conteudo').innerHTML = html;
           MathJax.typesetPromise();

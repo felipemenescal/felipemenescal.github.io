@@ -1,194 +1,269 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portal de Aulas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Helvetica, Arial, sans-serif; }
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Poppins', Helvetica, Arial, sans-serif;
-      color: rgb(12,37,124);
-      margin: 0;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Portal de Aulas — Versão estável</title>
 
-    .container {
-      display: flex;
-      height: 100vh;
-    }
+<!-- Fonte (opcional) -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    aside {
-      width: 16rem;
-      min-width: 16rem;
-      flex-shrink: 0;
-      flex-grow: 0;
-      display: flex;
-      flex-direction: column;
-      background-color: #1E3A8A;
-      padding: 1rem;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
+<style>
+  /* reset + box model */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body { height: 100%; }
+  body { font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
 
-    main {
-      flex: 1;
-      padding: 1.5rem;
-      overflow-y: auto;
-      min-width: 0;
-      background-color: #F1F5F9;
-    }
+  /* layout: container flex com sidebar de largura fixa */
+  .app {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-    nav ul { list-style: none; padding-left: 0; margin: 0; }
-    .sidebar-title {
-      color: #fff;
-      font-weight: bold;
-      margin: 0.75rem 0;
-    }
-    .sidebar-item { margin: 0.25rem 0; }
-    .sidebar-button {
-      width: 100%;
-      text-align: left;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
-      padding: 0.5rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .sidebar-button:hover { background-color: rgba(255,255,255,0.1); }
-    .sidebar-button-icon { font-size: 0.8rem; }
-    .sidebar-link {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      padding: 0.4rem 0.5rem 0.4rem 1.5rem;
-    }
-    .sidebar-link:hover { background-color: rgba(255,255,255,0.1); }
+  /* SIDEBAR (largura fixa, não encolhe) */
+  aside {
+    width: 16rem;            /* largura fixa */
+    min-width: 16rem;       /* força largura mínima */
+    flex: 0 0 16rem;        /* não cresce nem encolhe */
+    background: #11307A;    /* azul escuro para contraste */
+    color: #fff;
+    padding: 1rem;
+    overflow: hidden;       /* o scroll fica no .sidebar-scroll */
+  }
 
-    /* Submenus escondidos por padrão */
-    .sidebar-item ul {
-      display: none;
-      margin-left: 1rem;
-    }
-    .sidebar-item.active ul {
-      display: block;
-    }
+  /* área interna da sidebar que rola verticalmente */
+  .sidebar-scroll {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;     /* evita scroll horizontal */
+    padding-right: 0.25rem; /* folga para o scroll */
+  }
 
-    .content-box {
-      background: #fff;
-      padding: 1.5rem;
-      border-radius: 0.75rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-  </style>
+  /* remove bullets de todo lugar */
+  .sidebar-scroll ul, .sidebar-scroll li { list-style: none !important; margin: 0; padding: 0; }
+
+  /* títulos e espaçamentos */
+  .sidebar-title {
+    font-weight: 700;
+    margin: 0.5rem 0;
+    padding-left: 0.25rem; /* alinhamento uniforme */
+    color: #fff;
+  }
+
+  /* item de nível (apenas para suporte visual) */
+  .sidebar-item { margin: 0.25rem 0; }
+
+  /* BOTÃO: usamos label + ícone com largura fixa para NÃO deslocar texto */
+  .sidebar-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.45rem 0.25rem;
+    text-align: left;
+    border-radius: 6px;
+    transition: background .12s;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .sidebar-button:hover { background: rgba(255,255,255,0.06); }
+
+  /* label ocupa todo o espaço disponível menos o ícone */
+  .sidebar-button .label {
+    flex: 1 1 auto;
+    min-width: 0; /* importante: permite truncar/quebrar sem forçar largura */
+    white-space: normal;
+    word-break: break-word; /* evita overflow por texto longo */
+    padding-left: 0.25rem;  /* alinhamento interno padronizado */
+  }
+
+  /* ícone com largura fixa para não mudar layout */
+  .sidebar-button .icon {
+    flex: 0 0 1.25rem;
+    width: 1.25rem;
+    text-align: center;
+    color: #dfe7ff;
+    font-weight: 700;
+  }
+
+  /* SUBMENU: escondido por padrão, abre via max-height (sem empurrar layout) */
+  .submenu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .28s ease;
+    padding-left: 0.5rem; /* identação interna dos sublinks */
+  }
+  .sidebar-item.open > .submenu {
+    /* 12 linhas de link ~ 12 * 2rem = 24rem, valor alto o suficiente */
+    max-height: 30rem;
+  }
+
+  /* links do submenu */
+  .submenu a {
+    display: block;
+    padding: 0.35rem 0.25rem;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  .submenu a:hover { background: rgba(255,255,255,0.06); }
+
+  /* area principal */
+  main {
+    flex: 1 1 auto;
+    min-width: 0; /* evita que o main seja empurrado */
+    background: #f3f6fb;
+    padding: 1.25rem;
+    overflow: auto;
+  }
+
+  .content-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(6,30,60,0.08);
+  }
+
+  /* pequenas proteções para evitar overflow por conteúdo muito largo */
+  img, iframe, embed, object { max-width: 100%; height: auto; }
+
+  /* acessibilidade: foco */
+  .sidebar-button:focus, .submenu a:focus { outline: 2px dashed rgba(255,255,255,0.15); outline-offset: 2px; }
+</style>
 </head>
 <body>
-  <div class="container">
+  <div class="app">
     <aside>
-      <nav>
+      <div class="sidebar-scroll">
         <div class="sidebar-title">Disciplinas</div>
+
         <ul>
-          <li class="sidebar-item">
-            <button class="sidebar-button" data-main-src="disciplinas/matematica.html">
-              Matemática <span class="sidebar-button-icon">+</span>
+          <li class="sidebar-item" id="item-matematica">
+            <button class="sidebar-button" data-main="disciplinas/matematica.html" aria-expanded="false">
+              <span class="label">Matemática</span>
+              <span class="icon">+</span>
             </button>
-            <ul>
-              <li><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-              <li><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - HTML</a></li>
-            </ul>
+            <div class="submenu">
+              <a href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 — PDF</a>
+              <a href="conteudos/matematica_exemplo.html">Aula 2 — HTML</a>
+            </div>
           </li>
-          <li class="sidebar-item">
-            <button class="sidebar-button" data-main-src="disciplinas/fisica.html">
-              Física <span class="sidebar-button-icon">+</span>
+
+          <li class="sidebar-item" id="item-fisica">
+            <button class="sidebar-button" data-main="disciplinas/fisica.html" aria-expanded="false">
+              <span class="label">Física</span>
+              <span class="icon">+</span>
             </button>
-            <ul>
-              <li><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-            </ul>
+            <div class="submenu">
+              <a href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 — PDF</a>
+            </div>
           </li>
         </ul>
 
         <div class="sidebar-title">Outros</div>
+
         <ul>
-          <li class="sidebar-item">
-            <button class="sidebar-button" data-main-src="disciplinas/artes.html">
-              Artes <span class="sidebar-button-icon">+</span>
+          <li class="sidebar-item" id="item-artes">
+            <button class="sidebar-button" data-main="disciplinas/artes.html" aria-expanded="false">
+              <span class="label">Artes</span>
+              <span class="icon">+</span>
             </button>
-            <ul>
-              <li><a class="sidebar-link" href="conteudos/artes_exemplo.html">Conteúdo - HTML</a></li>
-            </ul>
+            <div class="submenu">
+              <a href="conteudos/artes_exemplo.html">Conteúdo — HTML</a>
+            </div>
           </li>
         </ul>
-      </nav>
+      </div>
     </aside>
 
     <main>
-      <section id="conteudo">
-        <div class="content-box">
-          <h2>Bem-vindo</h2>
-          <p>Selecione uma disciplina na barra lateral para visualizar os conteúdos.</p>
-        </div>
+      <section id="main-content" class="content-card" aria-live="polite">
+        <h2>Portal de Aulas</h2>
+        <p>Selecione uma disciplina na barra lateral para abrir a página ou conteúdo correspondente.</p>
       </section>
     </main>
   </div>
 
-  <script>
-    // Expansão dos menus
-    document.querySelectorAll('.sidebar-button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const parent = btn.parentElement;
-        const isActive = parent.classList.contains('active');
+<script>
+  // comportamento do menu — abre apenas um item por vez
+  (function () {
+    const items = document.querySelectorAll('.sidebar-item');
 
-        // Fecha todos
-        document.querySelectorAll('.sidebar-item').forEach(item => {
-          item.classList.remove('active');
-          const icon = item.querySelector('.sidebar-button-icon');
-          if(icon) icon.textContent = '+';
-        });
-
-        // Abre o clicado
-        if(!isActive){
-          parent.classList.add('active');
-          btn.querySelector('.sidebar-button-icon').textContent = '-';
-        }
-
-        // Carrega página principal da disciplina, se houver
-        const mainSrc = btn.dataset.mainSrc;
-        if(mainSrc){
-          fetch(mainSrc).then(resp => resp.text()).then(html => {
-            document.getElementById('conteudo').innerHTML = html;
-            MathJax.typesetPromise();
-          }).catch(() => {
-            document.getElementById('conteudo').innerHTML =
-              `<div class="content-box"><h2>Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
-          });
-        }
+    function closeAll() {
+      items.forEach(it => {
+        it.classList.remove('open');
+        const btn = it.querySelector('.sidebar-button');
+        if (btn) { btn.setAttribute('aria-expanded', 'false'); const ic = btn.querySelector('.icon'); if(ic) ic.textContent = '+'; }
       });
+    }
+
+    items.forEach(it => {
+      const btn = it.querySelector('.sidebar-button');
+      const submenu = it.querySelector('.submenu');
+
+      if (!btn) return;
+      btn.addEventListener('click', async (e) => {
+        const isOpen = it.classList.contains('open');
+
+        // fechar todos e abrir apenas o clicado
+        closeAll();
+        if (!isOpen) {
+          it.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          const ic = btn.querySelector('.icon'); if(ic) ic.textContent = '-';
+        }
+
+        // se o botão tiver atributo data-main, carregamos o HTML dentro do main
+        const mainPath = btn.getAttribute('data-main');
+        if (mainPath) {
+          try {
+            const res = await fetch(mainPath);
+            if (!res.ok) throw new Error('fetch_error');
+            const html = await res.text();
+            document.getElementById('main-content').innerHTML = html;
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              window.MathJax.typesetPromise();
+            }
+          } catch (err) {
+            document.getElementById('main-content').innerHTML =
+              '<h2>Erro</h2><p>Não foi possível carregar a página da disciplina.</p>';
+          }
+        }
+      }, { passive: true });
     });
 
-    // Abertura de links (PDF/HTML)
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-      link.addEventListener('click', e => {
+    // links do submenu: PDF abre nova aba; html carrega no main
+    document.querySelectorAll('.submenu a').forEach(a => {
+      a.addEventListener('click', async (e) => {
+        const href = a.getAttribute('href') || '';
+        if (href.toLowerCase().endsWith('.pdf')) {
+          // deixa o navegador abrir em nova aba (target="_blank" já presente em PDFs)
+          return;
+        }
+        // caso HTML interno: carregar no main
         e.preventDefault();
-        const src = link.getAttribute('href');
-        if(src.endsWith('.pdf')){
-          window.open(src, '_blank');
-        } else {
-          fetch(src).then(res => res.text()).then(html => {
-            document.getElementById('conteudo').innerHTML = html;
-            MathJax.typesetPromise();
-          }).catch(() => {
-            document.getElementById('conteudo').innerHTML =
-              `<div class="content-box"><h2>${link.textContent}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
-          });
+        try {
+          const res = await fetch(href);
+          if (!res.ok) throw new Error('fetch_error');
+          const html = await res.text();
+          document.getElementById('main-content').innerHTML = html;
+          if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise();
+          }
+        } catch (err) {
+          document.getElementById('main-content').innerHTML =
+            `<h2>Erro</h2><p>Erro ao carregar o conteúdo: ${a.textContent}</p>`;
         }
-      });
+      }, { passive: true });
     });
-  </script>
+  })();
+</script>
 </body>
 </html>

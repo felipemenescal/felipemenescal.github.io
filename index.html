@@ -8,30 +8,35 @@
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
   * { box-sizing: border-box; }
-  body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; height: 100vh; overflow: hidden; }
+  body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
   h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); margin: 0; }
 
-  .container { display: flex; height: 100vh; }
-
+  /* Barra lateral fixa */
   aside {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 16rem;
-    min-width: 16rem;
-    flex-shrink: 0;
-    flex-grow: 0;
-    display: flex;
-    flex-direction: column;
+    height: 100vh;
     background-color: #1E3A8A;
     padding: 1rem;
     overflow-y: auto;
-    overflow-x: hidden;
+  }
+
+  main {
+    margin-left: 16rem;
+    padding: 1.5rem;
+    background-color: #F1F5F9;
+    min-height: 100vh;
+    overflow-y: auto;
   }
 
   nav { flex: 1; }
 
-  /* Remove bullets e reseta margin/padding */
+  /* Remove bullets */
   aside ul, aside li { list-style: none !important; margin: 0; padding: 0; }
 
-  /* Hierarquia visual com indentação reduzida */
+  /* Hierarquia com indentação reduzida */
   .level-1 { padding-left: 0.5rem; }
   .level-2 { padding-left: 1rem; }
   .level-3 { padding-left: 1.5rem; }
@@ -43,69 +48,62 @@
   .sidebar-button:hover { background-color: #3B82F6; }
   .sidebar-button-icon { margin-left: auto; }
 
-  .sidebar-item ul {
-    display: none;
-    width: 100%;
-    box-sizing: border-box;
-  }
+  .sidebar-item ul { display: none; width: 100%; box-sizing: border-box; }
   .sidebar-item.active > ul { display: block; }
   .sidebar-link { display: block; text-decoration: none; border-radius: 0.25rem; padding: 0.3rem 0; font-size: 1rem; width: 100%; box-sizing: border-box; }
   .sidebar-link:hover { background-color: #2563EB; }
 
-  main { flex: 1; padding: 1.5rem; overflow-y: auto; min-width: 0; background-color: #F1F5F9; }
   .content-box { padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
   .content-box h2 { font-size:1.75rem; font-weight:600; margin-bottom:1rem; }
 </style>
 </head>
 <body>
-<div class="container">
-  <aside>
-    <nav>
-      <div class="sidebar-title level-1">Disciplinas</div>
-      <ul>
-        <li class="sidebar-item level-2">
-          <button class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span class="sidebar-button-icon">+</span></button>
-          <ul>
-            <li class="level-3"><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-            <li class="level-3"><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - HTML</a></li>
-          </ul>
-        </li>
-        <li class="sidebar-item level-2">
-          <button class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span class="sidebar-button-icon">+</span></button>
-          <ul>
-            <li class="level-3"><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-          </ul>
-        </li>
-      </ul>
-      <div class="sidebar-title level-1">Outros</div>
-      <ul>
-        <li class="sidebar-item level-2">
-          <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span class="sidebar-button-icon">+</span></button>
-          <ul>
-            <li class="level-3"><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-            <li class="level-3"><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - HTML</a></li>
-          </ul>
-        </li>
-        <li class="sidebar-item level-2">
-          <button class="sidebar-button" data-main-src="disciplinas/artes.html">Artes <span class="sidebar-button-icon">+</span></button>
-          <ul>
-            <li class="level-3"><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-            <li class="level-3"><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - HTML</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </aside>
+<aside>
+  <nav>
+    <div class="sidebar-title level-1">Disciplinas</div>
+    <ul>
+      <li class="sidebar-item level-2">
+        <button class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span class="sidebar-button-icon">+</span></button>
+        <ul>
+          <li class="level-3"><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li class="level-3"><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+      <li class="sidebar-item level-2">
+        <button class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span class="sidebar-button-icon">+</span></button>
+        <ul>
+          <li class="level-3"><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="sidebar-title level-1">Outros</div>
+    <ul>
+      <li class="sidebar-item level-2">
+        <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span class="sidebar-button-icon">+</span></button>
+        <ul>
+          <li class="level-3"><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li class="level-3"><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+      <li class="sidebar-item level-2">
+        <button class="sidebar-button" data-main-src="disciplinas/artes.html">Artes <span class="sidebar-button-icon">+</span></button>
+        <ul>
+          <li class="level-3"><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li class="level-3"><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</aside>
 
-  <main>
-    <section id="conteudo">
-      <div class="content-box">
-        <h2>Bem-vindo</h2>
-        <p>Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
-      </div>
-    </section>
-  </main>
-</div>
+<main>
+  <section id="conteudo">
+    <div class="content-box">
+      <h2>Bem-vindo</h2>
+      <p>Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
+    </div>
+  </section>
+</main>
 
 <script>
 document.querySelectorAll('.sidebar-button').forEach(btn => {

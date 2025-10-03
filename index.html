@@ -63,101 +63,95 @@
 
 <div class="container">
   <aside>
+  <nav>
     <div class="sidebar-title">Disciplinas</div>
-    <nav>
-      <ul>
-        <li class="sidebar-item">
-          <button class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span>+</span></button>
-          <ul>
-            <li><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - Introdução (PDF)</a></li>
-            <li><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
-          </ul>
-        </li>
-        <li class="sidebar-item">
-          <button class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span>+</span></button>
-          <ul>
-            <li><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - Cinemática (PDF)</a></li>
-            <li><a class="sidebar-link" href="conteudos/fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
-          </ul>
-        </li>
-        <li class="sidebar-item">
-          <button class="sidebar-button" data-main-src="disciplinas/historia.html">História <span>+</span></button>
-          <ul>
-            <li><a class="sidebar-link" href="arquivos/historia_medieval.pdf" target="_blank">Idade Média (PDF)</a></li>
-            <li><a class="sidebar-link" href="conteudos/historia_renascimento.html">Renascimento (HTML)</a></li>
-          </ul>
-        </li>
-        <div class="sidebar-title">Outros</div>
-        <li class="sidebar-item">
-          <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span>+</span></button>
-          <ul>
-            <li><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - Introdução (PDF)</a></li>
-            <li><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
-          </ul>
-        </li>
-        <li class="sidebar-item">
-          <button class="sidebar-button" data-main-src="disciplinas/artes.html">Artes <span>+</span></button>
-          <ul>
-            <li><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - Introdução (PDF)</a></li>
-            <li><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </aside>
+    <ul>
+      <li class="sidebar-item">
+        <button class="sidebar-button" data-main-src="disciplinas/matematica.html">
+          Matemática <span class="sidebar-button-icon">+</span>
+        </button>
+        <ul>
+          <li><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+      <li class="sidebar-item">
+        <button class="sidebar-button" data-main-src="disciplinas/fisica.html">
+          Física <span class="sidebar-button-icon">+</span>
+        </button>
+        <ul>
+          <li><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li><a class="sidebar-link" href="conteudos/fisica_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+    </ul>
 
-  <main>
-    <section id="conteudo">
-      <div class="content-box">
-        <h2>Bem-vindo</h2>
-        <p>Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
-      </div>
-    </section>
-  </main>
-</div>
+    <div class="sidebar-title">Outros</div>
+    <ul>
+      <li class="sidebar-item">
+        <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">
+          Educação Física <span class="sidebar-button-icon">+</span>
+        </button>
+        <ul>
+          <li><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+      <li class="sidebar-item">
+        <button class="sidebar-button" data-main-src="disciplinas/artes.html">
+          Artes <span class="sidebar-button-icon">+</span>
+        </button>
+        <ul>
+          <li><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          <li><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - HTML</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</aside>
+
+<style>
+/* Identação uniforme para todos os elementos */
+.sidebar-title, .sidebar-button, .sidebar-link {
+  padding-left: 1rem;
+  color: #fff;
+}
+.sidebar-button {
+  display: flex;
+  justify-content: space-between;
+  background: transparent;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+}
+.sidebar-button:hover { background-color: #3B82F6; }
+.sidebar-button-icon { margin-left: auto; }
+.sidebar-item ul { display: none; list-style: none; padding: 0; margin: 0; }
+.sidebar-item.active > ul { display: block; }
+.sidebar-link {
+  display: block;
+  text-decoration: none;
+  padding: 0.5rem 0;
+}
+.sidebar-link:hover { background-color: #2563EB; }
+</style>
 
 <script>
-  document.querySelectorAll('.sidebar-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const parent = btn.parentElement;
-      const isActive = parent.classList.contains('active');
-      document.querySelectorAll('.sidebar-item').forEach(item => {
-        item.classList.remove('active');
-        const span = item.querySelector('.sidebar-button span');
-        if(span) span.textContent = '+';
-      });
-      if(!isActive){
-        parent.classList.add('active');
-        btn.querySelector('span').textContent = '-';
-      }
-      const mainSrc = btn.dataset.mainSrc;
-      if(mainSrc){
-        fetch(mainSrc).then(resp => resp.text()).then(html => {
-          document.getElementById('conteudo').innerHTML = html;
-          MathJax.typesetPromise();
-        }).catch(() => {
-          document.getElementById('conteudo').innerHTML = `<div class="content-box"><h2>Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
-        });
-      }
+document.querySelectorAll('.sidebar-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const parent = btn.parentElement;
+    const isActive = parent.classList.contains('active');
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.classList.remove('active');
+      const icon = item.querySelector('.sidebar-button-icon');
+      if(icon) icon.textContent = '+';
     });
+    if(!isActive){
+      parent.classList.add('active');
+      btn.querySelector('.sidebar-button-icon').textContent = '-';
+    }
   });
-
-  document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const src = link.getAttribute('href');
-      const title = link.textContent;
-      if(src.endsWith('.pdf')) window.open(src, '_blank');
-      else {
-        fetch(src).then(res => res.text()).then(html => {
-          document.getElementById('conteudo').innerHTML = html;
-          MathJax.typesetPromise();
-        }).catch(() => {
-          document.getElementById('conteudo').innerHTML = `<div class="content-box"><h2>${title}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
-        });
-      }
-    });
-  });
+});
 </script>
 
 </body>

@@ -13,10 +13,6 @@
     h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: var(--accent); }
     .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(6px); }
     .sidebar-item.active > ul { display: block; }
-    /* PDF modal styles */
-    .modal { display: none; position: fixed; inset: 0; z-index: 60; align-items: center; justify-content: center; }
-    .modal.open { display: flex; }
-    .pdf-canvas { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
   </style>
 </head>
 <body class="bg-gradient-to-b from-slate-50 to-slate-100 min-h-screen text-slate-800">
@@ -28,21 +24,29 @@
         <ul class="space-y-2" id="disciplinasMenu">
           <li class="sidebar-item">
             <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
-              Matemática <span>+</span>
+              Física Experimental I <span>+</span>
             </button>
             <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
               <li><a href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Introdução (PDF)</a></li>
-              <li><a href="#" data-type="ppt" data-src="arquivos/matematica_aula2.pptx" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Álgebra (PPT)</a></li>
-              <li><a href="#" data-type="text" class="block px-2 py-1 rounded hover:bg-slate-100">Exercícios Resolvidos</a></li>
+              <li><a href="#" data-type="html" data-src="conteudos/matematica_exemplo.html" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Exercícios (HTML)</a></li>
             </ul>
           </li>
           <li class="sidebar-item">
             <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
-              Física Computacional<span>+</span>
+              Física I <span>+</span>
             </button>
             <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
-              <li><a href="#" data-type="pdf" data-src="fiscomp/pt2.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Miniprojeto 2 (PDF)</a></li>
-              <li><a href="#" data-type="text" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Dinâmica</a></li>
+              <li><a href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Introdução (PDF)</a></li>
+              <li><a href="#" data-type="html" data-src="conteudos/matematica_exemplo.html" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Exercícios (HTML)</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+              Física Computacional <span>+</span>
+            </button>
+            <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
+              <li><a href="#" data-type="pdf" data-src="fiscomp/pt2.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Cinemática (PDF)</a></li>
+              <li><a href="#" data-type="html" data-src="conteudos/fisica_exemplo.html" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Exercícios (HTML)</a></li>
             </ul>
           </li>
           <li class="sidebar-item">
@@ -51,7 +55,7 @@
             </button>
             <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
               <li><a href="#" data-type="pdf" data-src="arquivos/historia_medieval.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Idade Média (PDF)</a></li>
-              <li><a href="#" data-type="ppt" data-src="arquivos/historia_renascimento.pptx" class="block px-2 py-1 rounded hover:bg-slate-100">Renascimento (PPT)</a></li>
+              <li><a href="#" data-type="html" data-src="conteudos/historia_renascimento.html" class="block px-2 py-1 rounded hover:bg-slate-100">Renascimento (HTML)</a></li>
             </ul>
           </li>
         </ul>
@@ -82,31 +86,7 @@
     </main>
   </div>
 
-  <!-- PDF modal (uses PDF.js) -->
-  <div id="pdfModal" class="modal">
-    <div class="w-[90%] h-[90%] bg-white rounded-2xl shadow-lg overflow-hidden">
-      <div class="flex items-center justify-between p-3 border-b">
-        <div class="flex items-center gap-3">
-          <button id="pdfPrev" class="px-3 py-1 border rounded">◀</button>
-          <button id="pdfNext" class="px-3 py-1 border rounded">▶</button>
-          <span id="pageInfo" class="text-sm text-slate-600">Página <span id="pdfPageNum">1</span> / <span id="pdfPageCount">—</span></span>
-        </div>
-        <div class="flex items-center gap-2">
-          <button id="zoomOut" class="px-3 py-1 border rounded">-</button>
-          <button id="zoomIn" class="px-3 py-1 border rounded">+</button>
-          <button id="pdfClose" class="px-3 py-1 border rounded">Fechar</button>
-        </div>
-      </div>
-      <div class="p-4 h-[calc(100%-64px)] overflow-auto">
-        <div id="pdfContainer" class="pdf-canvas">
-          <canvas id="pdfCanvas"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Scripts -->
-  <script src="https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.min.js"></script>
   <script>
     // Accent color picker
     document.querySelectorAll('[data-color]').forEach(btn => {
@@ -136,108 +116,25 @@
         let contentHTML = '';
 
         if(type === 'pdf'){
-          // open in PDF.js modal
-          openPDF(src, title);
+          window.open(src, '_blank'); // abre PDF em outra aba
+          return;
+        } else if(type === 'html'){
+          // carrega a página HTML do Jupyter no div #conteudo
+          fetch(src)
+            .then(response => response.text())
+            .then(html => { document.getElementById('conteudo').innerHTML = html; })
+            .catch(err => {
+              document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">${title}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
+            });
           return;
         } else if(type === 'ppt'){
-          contentHTML = `
-            <div class="p-6 bg-white rounded-2xl shadow">
-              <h2 class="text-2xl font-semibold mb-4">${title}</h2>
-              <p class="mb-2 text-slate-600">Clique abaixo para baixar a apresentação:</p>
-              <a href="${src}" download class="px-4 py-2 bg-indigo-600 text-white rounded shadow hover:bg-indigo-700">Baixar PPT</a>
-            </div>`;
+          contentHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">${title}</h2><p class="mb-2 text-slate-600">Clique abaixo para baixar a apresentação:</p><a href="${src}" download class="px-4 py-2 bg-indigo-600 text-white rounded shadow hover:bg-indigo-700">Baixar PPT</a></div>`;
         } else {
-          contentHTML = `
-            <div class="p-6 bg-white rounded-2xl shadow">
-              <h2 class="text-2xl font-semibold mb-4">${title}</h2>
-              <p class="text-slate-700">Aqui vai o conteúdo de <strong>${title}</strong>. Substitua este texto com o material correspondente.</p>
-            </div>`;
+          contentHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">${title}</h2><p>Aqui vai o conteúdo de <strong>${title}</strong>.</p></div>`;
         }
 
         document.getElementById('conteudo').innerHTML = contentHTML;
       });
-    });
-
-    /* ---------------- PDF.js viewer logic ---------------- */
-    const pdfjsLib = window['pdfjs-dist/build/pdf'];
-    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://unpkg.com/pdfjs-dist@3.8.162/build/pdf.worker.min.js';
-
-    let pdfDoc = null;
-    let currentPage = 1;
-    let pageRendering = false;
-    let pageNumPending = null;
-    let scale = 1.2;
-    const canvas = document.getElementById('pdfCanvas');
-    const ctx = canvas.getContext('2d');
-
-    async function openPDF(url, title){
-      try{
-        pdfDoc = await pdfjsLib.getDocument(url).promise;
-        document.getElementById('pdfPageCount').textContent = pdfDoc.numPages;
-        currentPage = 1; scale = 1.2;
-        renderPage(currentPage);
-        document.getElementById('pdfModal').classList.add('open');
-      }catch(err){
-        console.error('Erro ao carregar PDF:', err);
-        // fallback to iframe if pdf.js fails
-        document.getElementById('conteudo').innerHTML = `\n          <div class="p-6 bg-white rounded-2xl shadow">\n            <h2 class="text-2xl font-semibold mb-4">${title}</h2>\n            <iframe src="${url}" class="w-full h-[600px] border rounded"></iframe>\n          </div>`;
-      }
-    }
-
-    function renderPage(num){
-      pageRendering = true;
-      pdfDoc.getPage(num).then(function(page) {
-        const viewport = page.getViewport({ scale: scale });
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
-
-        const renderContext = {
-          canvasContext: ctx,
-          viewport: viewport
-        };
-        const renderTask = page.render(renderContext);
-
-        renderTask.promise.then(function () {
-          pageRendering = false;
-          document.getElementById('pdfPageNum').textContent = num;
-          if (pageNumPending !== null) {
-            renderPage(pageNumPending);
-            pageNumPending = null;
-          }
-        });
-      });
-    }
-
-    function queueRenderPage(num) {
-      if (pageRendering) {
-        pageNumPending = num;
-      } else {
-        renderPage(num);
-      }
-    }
-
-    document.getElementById('pdfPrev').addEventListener('click', function(){
-      if(!pdfDoc) return;
-      if(currentPage <= 1) return;
-      currentPage--;
-      queueRenderPage(currentPage);
-    });
-    document.getElementById('pdfNext').addEventListener('click', function(){
-      if(!pdfDoc) return;
-      if(currentPage >= pdfDoc.numPages) return;
-      currentPage++;
-      queueRenderPage(currentPage);
-    });
-    document.getElementById('zoomIn').addEventListener('click', function(){ if(!pdfDoc) return; scale = Math.min(scale + 0.2, 3); queueRenderPage(currentPage); });
-    document.getElementById('zoomOut').addEventListener('click', function(){ if(!pdfDoc) return; scale = Math.max(scale - 0.2, 0.5); queueRenderPage(currentPage); });
-    document.getElementById('pdfClose').addEventListener('click', function(){ pdfDoc = null; document.getElementById('pdfModal').classList.remove('open'); });
-
-    // close modal on Escape
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') document.getElementById('pdfModal').classList.remove('open'); });
-
-    // small UX: close modal when clicking outside viewer
-    document.getElementById('pdfModal').addEventListener('click', (e)=>{
-      if(e.target.id === 'pdfModal') document.getElementById('pdfModal').classList.remove('open');
     });
   </script>
 </body>

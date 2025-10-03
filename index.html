@@ -16,8 +16,8 @@
     .sidebar-item { display: flex; flex-direction: column; }
     .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; background: transparent; }
     .sidebar-button:hover { background-color: #e0e7ff; }
-    .sidebar-item ul { display: none; padding-left: 1rem; margin: 0; }
-    .sidebar-item.active > ul { display: block; }
+    .sidebar-item ul { display: none; flex-direction: column; padding-left: 1rem; margin: 0; }
+    .sidebar-item.active > ul { display: flex; }
     .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: rgb(12,37,124); }
     .sidebar-link:hover { background-color: #f1f5f9; }
     main { flex: 1; padding: 1.5rem; overflow-y: auto; }
@@ -86,21 +86,15 @@
 </div>
 
 <script>
-  function closeAllSiblings(current) {
-    document.querySelectorAll('.sidebar-item').forEach(item => {
-      if(item !== current){
-        item.classList.remove('active');
-        const span = item.querySelector('.sidebar-button span');
-        if(span) span.textContent = '+';
-      }
-    });
-  }
-
   document.querySelectorAll('.sidebar-button').forEach(btn => {
     btn.addEventListener('click', () => {
       const parent = btn.parentElement;
       const isActive = parent.classList.contains('active');
-      closeAllSiblings(parent);
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        item.classList.remove('active');
+        const span = item.querySelector('.sidebar-button span');
+        if(span) span.textContent = '+';
+      });
       if(!isActive){
         parent.classList.add('active');
         btn.querySelector('span').textContent = '-';
@@ -134,3 +128,7 @@
       }
     });
   });
+</script>
+
+</body>
+</html>

@@ -8,9 +8,8 @@
   <!-- Fonte estilizada para títulos -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
-    :root{ --accent:#4338ca; }
     body { font-family: Helvetica, Arial, sans-serif; }
-    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: var(--accent); }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: #4338ca; }
     .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(6px); }
     .sidebar-item.active > ul { display: block; }
   </style>
@@ -23,8 +22,8 @@
       <nav>
         <ul class="space-y-2" id="disciplinasMenu">
           <li class="sidebar-item">
-            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
-              Física Experimental I <span>+</span>
+            <button data-main-src="disciplinas/matematica.html" class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+              Matemática <span>+</span>
             </button>
             <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
               <li><a href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Introdução (PDF)</a></li>
@@ -32,25 +31,16 @@
             </ul>
           </li>
           <li class="sidebar-item">
-            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
-              Física I <span>+</span>
+            <button data-main-src="disciplinas/fisica.html" class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+              Física <span>+</span>
             </button>
             <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
-              <li><a href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Introdução (PDF)</a></li>
-              <li><a href="#" data-type="html" data-src="conteudos/matematica_exemplo.html" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Exercícios (HTML)</a></li>
-            </ul>
-          </li>
-          <li class="sidebar-item">
-            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
-              Física Computacional <span>+</span>
-            </button>
-            <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
-              <li><a href="#" data-type="pdf" data-src="fiscomp/pt2.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Cinemática (PDF)</a></li>
+              <li><a href="#" data-type="pdf" data-src="arquivos/fisica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Cinemática (PDF)</a></li>
               <li><a href="#" data-type="html" data-src="conteudos/fisica_exemplo.html" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Exercícios (HTML)</a></li>
             </ul>
           </li>
           <li class="sidebar-item">
-            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+            <button data-main-src="disciplinas/historia.html" class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
               História <span>+</span>
             </button>
             <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
@@ -64,17 +54,9 @@
 
     <!-- Main Content -->
     <main class="flex-1 p-6 overflow-y-auto">
-      <header class="mb-6 flex items-center justify-between gap-4">
-        <div>
-          <h1 class="text-3xl font-bold">Portal de Aulas</h1>
-          <p class="text-slate-600">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <label class="text-sm text-slate-600 mr-2">Cor de acento:</label>
-          <button data-color="#4338ca" class="px-3 py-1 rounded shadow-sm" aria-label="Indigo">Azul</button>
-          <button data-color="#065f46" class="px-3 py-1 rounded shadow-sm" aria-label="Emerald">Verde</button>
-          <button data-color="#6d28d9" class="px-3 py-1 rounded shadow-sm" aria-label="Purple">Roxo</button>
-        </div>
+      <header class="mb-6">
+        <h1 class="text-3xl font-bold">Portal de Aulas</h1>
+        <p class="text-slate-600">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>
       </header>
 
       <section id="conteudo" class="space-y-6">
@@ -88,25 +70,30 @@
 
   <!-- Scripts -->
   <script>
-    // Accent color picker
-    document.querySelectorAll('[data-color]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const c = btn.dataset.color;
-        document.documentElement.style.setProperty('--accent', c);
-      });
-    });
-
-    // Toggle cascata menu
+    // Toggle cascata menu e carregar página da disciplina
     document.querySelectorAll('.sidebar-item > button').forEach(btn => {
       btn.addEventListener('click', () => {
         const parent = btn.parentElement;
         parent.classList.toggle('active');
         const symbol = btn.querySelector('span');
         symbol.textContent = parent.classList.contains('active') ? '-' : '+';
+
+        // Carregar página principal da disciplina se existir
+        const mainSrc = btn.dataset.mainSrc;
+        if(mainSrc){
+          fetch(mainSrc)
+            .then(resp => resp.text())
+            .then(html => {
+              document.getElementById('conteudo').innerHTML = html;
+            })
+            .catch(err => {
+              document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
+            });
+        }
       });
     });
 
-    // Content links behavior
+    // Content links behavior (PDF, HTML, PPT)
     document.querySelectorAll('#disciplinasMenu a').forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -119,7 +106,6 @@
           window.open(src, '_blank'); // abre PDF em outra aba
           return;
         } else if(type === 'html'){
-          // carrega a página HTML do Jupyter no div #conteudo
           fetch(src)
             .then(response => response.text())
             .then(html => { document.getElementById('conteudo').innerHTML = html; })

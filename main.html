@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portal de Aulas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonte estilizada para títulos -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Helvetica, Arial, sans-serif; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; }
+    .glass { background: rgba(255,255,255,0.7); backdrop-filter: blur(6px); }
+    .sidebar-item.active > ul { display: block; }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 to-slate-100 min-h-screen text-slate-800">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 glass p-4 overflow-y-auto shadow-lg">
+      <h2 class="text-xl font-semibold mb-4">Disciplinas</h2>
+      <nav>
+        <ul class="space-y-2" id="disciplinasMenu">
+          <li class="sidebar-item">
+            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+              Matemática <span>+</span>
+            </button>
+            <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
+              <li><a href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Introdução (PDF)</a></li>
+              <li><a href="#" data-type="ppt" data-src="arquivos/matematica_aula2.pptx" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Álgebra (PPT)</a></li>
+              <li><a href="#" data-type="text" class="block px-2 py-1 rounded hover:bg-slate-100">Exercícios Resolvidos</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+              Física <span>+</span>
+            </button>
+            <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
+              <li><a href="#" data-type="pdf" data-src="arquivos/fisica_aula1.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 1 - Cinemática (PDF)</a></li>
+              <li><a href="#" data-type="text" class="block px-2 py-1 rounded hover:bg-slate-100">Aula 2 - Dinâmica</a></li>
+            </ul>
+          </li>
+          <li class="sidebar-item">
+            <button class="w-full flex justify-between items-center px-2 py-2 rounded hover:bg-indigo-100">
+              História <span>+</span>
+            </button>
+            <ul class="hidden ml-4 mt-1 space-y-1 text-sm">
+              <li><a href="#" data-type="pdf" data-src="arquivos/historia_medieval.pdf" class="block px-2 py-1 rounded hover:bg-slate-100">Idade Média (PDF)</a></li>
+              <li><a href="#" data-type="ppt" data-src="arquivos/historia_renascimento.pptx" class="block px-2 py-1 rounded hover:bg-slate-100">Renascimento (PPT)</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6 overflow-y-auto">
+      <header class="mb-6">
+        <h1 class="text-3xl font-bold">Portal de Aulas</h1>
+        <p class="text-slate-600">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>
+      </header>
+
+      <section id="conteudo" class="space-y-6">
+        <div class="p-6 bg-white rounded-2xl shadow">
+          <h2 class="text-2xl font-semibold mb-4">Bem-vindo</h2>
+          <p class="text-slate-700">Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações e notas de aula.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Toggle cascata menu
+    document.querySelectorAll('.sidebar-item > button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const parent = btn.parentElement;
+        parent.classList.toggle('active');
+        const symbol = btn.querySelector('span');
+        symbol.textContent = parent.classList.contains('active') ? '-' : '+';
+      });
+    });
+
+    // Ao clicar em um link de conteúdo
+    document.querySelectorAll('#disciplinasMenu a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const title = link.textContent;
+        const type = link.dataset.type;
+        const src = link.dataset.src;
+        let contentHTML = '';
+
+        if(type === 'pdf'){
+          contentHTML = `
+            <div class="p-6 bg-white rounded-2xl shadow">
+              <h2 class="text-2xl font-semibold mb-4">${title}</h2>
+              <iframe src="${src}" class="w-full h-[600px] border rounded"></iframe>
+            </div>`;
+        } else if(type === 'ppt'){
+          contentHTML = `
+            <div class="p-6 bg-white rounded-2xl shadow">
+              <h2 class="text-2xl font-semibold mb-4">${title}</h2>
+              <p class="mb-2 text-slate-600">Clique abaixo para baixar a apresentação:</p>
+              <a href="${src}" download class="px-4 py-2 bg-indigo-600 text-white rounded shadow hover:bg-indigo-700">Baixar PPT</a>
+            </div>`;
+        } else {
+          contentHTML = `
+            <div class="p-6 bg-white rounded-2xl shadow">
+              <h2 class="text-2xl font-semibold mb-4">${title}</h2>
+              <p class="text-slate-700">Aqui vai o conteúdo de <strong>${title}</strong>. Substitua este texto com o material correspondente.</p>
+            </div>`;
+        }
+
+        document.getElementById('conteudo').innerHTML = contentHTML;
+      });
+    });
+  </script>
+</body>
+</html>

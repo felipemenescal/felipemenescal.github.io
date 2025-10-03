@@ -12,46 +12,27 @@
   h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); margin: 0; }
 
   .container { display: flex; height: 100vh; }
-
-  aside {
-    width: 16rem;
-    height: 100vh;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: #1E3A8A;
-    padding: 1rem;
-    overflow-y: auto;
-  }
-
+  aside { width: 16rem; flex-shrink: 0; display: flex; flex-direction: column; background-color: #1E3A8A; padding: 1rem; overflow-y: auto; }
   nav { flex: 1; }
 
-  .sidebar-title { font-size: 1.25rem; font-weight: 600; color: #FFFFFF; margin-top: 1rem; margin-bottom: 0.25rem; }
-  .sidebar-item { display: flex; flex-direction: column; }
-  .sidebar-button {
-    width: 100%;
-    text-left;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    border-radius: 0.25rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #FFFFFF;
-    cursor: pointer;
-    background: transparent;
-    border: none;
-  }
+  /* Remover bullets de todos os níveis */
+  aside ul, aside li { list-style: none !important; margin: 0; padding: 0; }
+
+  /* Hierarquia visual com indentação reduzida */
+  .level-1 { padding-left: 0.5rem; }
+  .level-2 { padding-left: 1rem; }
+  .level-3 { padding-left: 1.5rem; }
+
+  .sidebar-title, .sidebar-button, .sidebar-link { color: #fff; }
+  .sidebar-title { font-size: 1.25rem; font-weight: 600; margin: 0.5rem 0 0.25rem 0; }
+
+  .sidebar-button { display: flex; justify-content: space-between; align-items: center; background: transparent; border: none; width: 100%; cursor: pointer; font-weight: 600; font-size: 1rem; border-radius: 0.25rem; }
   .sidebar-button:hover { background-color: #3B82F6; }
-  .sidebar-item ul {
-    display: none;
-    flex-direction: column;
-    padding-left: 1rem;
-    margin: 0;
-  }
-  .sidebar-item.active > ul { display: flex; }
-  .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: #FFFFFF; text-decoration: none; padding-left: 1rem; }
+  .sidebar-button-icon { margin-left: auto; }
+
+  .sidebar-item ul { display: none; }
+  .sidebar-item.active > ul { display: block; }
+  .sidebar-link { display: block; text-decoration: none; border-radius: 0.25rem; padding: 0.3rem 0; font-size: 1rem; }
   .sidebar-link:hover { background-color: #2563EB; }
 
   main { flex: 1; padding: 1.5rem; overflow-y: auto; min-width: 0; background-color: #F1F5F9; }
@@ -60,81 +41,54 @@
 </style>
 </head>
 <body>
-
 <div class="container">
   <aside>
-  <nav>
-    <div class="sidebar-title">Disciplinas</div>
-    <ul>
-      <li class="sidebar-item">
-        <button class="sidebar-button" data-main-src="disciplinas/matematica.html">
-          Matemática <span class="sidebar-button-icon">+</span>
-        </button>
-        <ul>
-          <li><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-          <li><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - HTML</a></li>
-        </ul>
-      </li>
-      <li class="sidebar-item">
-        <button class="sidebar-button" data-main-src="disciplinas/fisica.html">
-          Física <span class="sidebar-button-icon">+</span>
-        </button>
-        <ul>
-          <li><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-          <li><a class="sidebar-link" href="conteudos/fisica_exemplo.html">Aula 2 - HTML</a></li>
-        </ul>
-      </li>
-    </ul>
+    <nav>
+      <div class="sidebar-title level-1">Disciplinas</div>
+      <ul>
+        <li class="sidebar-item level-2">
+          <button class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span class="sidebar-button-icon">+</span></button>
+          <ul>
+            <li class="level-3"><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+            <li class="level-3"><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - HTML</a></li>
+          </ul>
+        </li>
+        <li class="sidebar-item level-2">
+          <button class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span class="sidebar-button-icon">+</span></button>
+          <ul>
+            <li class="level-3"><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="sidebar-title level-1">Outros</div>
+      <ul>
+        <li class="sidebar-item level-2">
+          <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span class="sidebar-button-icon">+</span></button>
+          <ul>
+            <li class="level-3"><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+            <li class="level-3"><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - HTML</a></li>
+          </ul>
+        </li>
+        <li class="sidebar-item level-2">
+          <button class="sidebar-button" data-main-src="disciplinas/artes.html">Artes <span class="sidebar-button-icon">+</span></button>
+          <ul>
+            <li class="level-3"><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
+            <li class="level-3"><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - HTML</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
 
-    <div class="sidebar-title">Outros</div>
-    <ul>
-      <li class="sidebar-item">
-        <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">
-          Educação Física <span class="sidebar-button-icon">+</span>
-        </button>
-        <ul>
-          <li><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-          <li><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - HTML</a></li>
-        </ul>
-      </li>
-      <li class="sidebar-item">
-        <button class="sidebar-button" data-main-src="disciplinas/artes.html">
-          Artes <span class="sidebar-button-icon">+</span>
-        </button>
-        <ul>
-          <li><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - PDF</a></li>
-          <li><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - HTML</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-</aside>
-
-<style>
-/* Identação uniforme para todos os elementos */
-.sidebar-title, .sidebar-button, .sidebar-link {
-  padding-left: 1rem;
-  color: #fff;
-}
-.sidebar-button {
-  display: flex;
-  justify-content: space-between;
-  background: transparent;
-  border: none;
-  width: 100%;
-  cursor: pointer;
-}
-.sidebar-button:hover { background-color: #3B82F6; }
-.sidebar-button-icon { margin-left: auto; }
-.sidebar-item ul { display: none; list-style: none; padding: 0; margin: 0; }
-.sidebar-item.active > ul { display: block; }
-.sidebar-link {
-  display: block;
-  text-decoration: none;
-  padding: 0.5rem 0;
-}
-.sidebar-link:hover { background-color: #2563EB; }
-</style>
+  <main>
+    <section id="conteudo">
+      <div class="content-box">
+        <h2>Bem-vindo</h2>
+        <p>Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
+      </div>
+    </section>
+  </main>
+</div>
 
 <script>
 document.querySelectorAll('.sidebar-button').forEach(btn => {
@@ -150,9 +104,33 @@ document.querySelectorAll('.sidebar-button').forEach(btn => {
       parent.classList.add('active');
       btn.querySelector('.sidebar-button-icon').textContent = '-';
     }
+    const mainSrc = btn.dataset.mainSrc;
+    if(mainSrc){
+      fetch(mainSrc).then(resp => resp.text()).then(html => {
+        document.getElementById('conteudo').innerHTML = html;
+        MathJax.typesetPromise();
+      }).catch(() => {
+        document.getElementById('conteudo').innerHTML = `<div class="content-box"><h2>Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
+      });
+    }
+  });
+});
+
+document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const src = link.getAttribute('href');
+    if(src.endsWith('.pdf')) window.open(src, '_blank');
+    else {
+      fetch(src).then(res => res.text()).then(html => {
+        document.getElementById('conteudo').innerHTML = html;
+        MathJax.typesetPromise();
+      }).catch(() => {
+        document.getElementById('conteudo').innerHTML = `<div class="content-box"><h2>${link.textContent}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
+      });
+    }
   });
 });
 </script>
-
 </body>
 </html>

@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body { font-family: Helvetica, Arial, sans-serif; }
-    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: #000000; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); }
     .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); }
     .sidebar-item ul { display: none; }
     .sidebar-item.active ul { display: block; }
@@ -18,6 +18,8 @@
     .sidebar-button:hover { background-color: #e0e7ff; }
     .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; }
     .sidebar-link:hover { background-color: #f1f5f9; }
+    .sidebar-nonclick { font-weight: bold; padding: 0.5rem; color: rgb(12,37,124); cursor: default; display: flex; justify-content: space-between; align-items: center; }
+    .nested-sidebar-item ul { padding-left: 1rem; }
   </style>
 </head>
 <body class="bg-gradient-to-b from-slate-50 to-slate-100 min-h-screen text-slate-800">
@@ -29,56 +31,55 @@
       <nav>
         <ul id="disciplinasMenu" class="space-y-2">
           <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fisexp1/fisexp1.html">
-              Física Experimental I <span>+</span>
+            <div class="sidebar-button" data-main-src="disciplinas/matematica.html">
+              Matemática <span>+</span>
             </div>
             <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fisexp1/ementafisexp1.pdf">Ementa</a></li>
+              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
+              <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/matematica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
             </ul>
           </li>
           <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fisica1/fisica1.html">
-              Física I <span>+</span>
+            <div class="sidebar-button" data-main-src="disciplinas/fisica.html">
+              Física <span>+</span>
             </div>
             <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fisica1/ementafisica1.pdf">Ementa</a></li>
+              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/fisica_aula1.pdf">Aula 1 - Cinemática (PDF)</a></li>
+              <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
             </ul>
           </li>
           <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fiscomp/fiscomp.html">
-              Física Computacional <span>+</span>
+            <div class="sidebar-button" data-main-src="disciplinas/historia.html">
+              História <span>+</span>
             </div>
             <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fiscomp/ementafiscomp.pdf">Ementa</a></li>
+              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/historia_medieval.pdf">Idade Média (PDF)</a></li>
+              <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/historia_renascimento.html">Renascimento (HTML)</a></li>
             </ul>
           </li>
-        </ul>
-      </nav>
-      <h2 class="text-xl font-semibold mb-4">Outros</h2>
-      <nav>
-        <ul id="disciplinasMenu" class="space-y-2">
+
+          <!-- Nova aba "Outros" com mesma aparência e indentação -->
           <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fisexp1/fisexp1.html">
-              Física Experimental I <span>+</span>
-            </div>
+            <div class="sidebar-nonclick">Outros <span></span></div>
             <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fisexp1/ementafisexp1.pdf">Ementa</a></li>
-            </ul>
-          </li>
-          <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fisica1/fisica1.html">
-              Física I <span>+</span>
-            </div>
-            <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fisica1/ementafisica1.pdf">Ementa</a></li>
-            </ul>
-          </li>
-          <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fiscomp/fiscomp.html">
-              Física Computacional <span>+</span>
-            </div>
-            <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fiscomp/ementafiscomp.pdf">Ementa</a></li>
+              <li class="nested-sidebar-item sidebar-item">
+                <div class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">
+                  Educação Física <span>+</span>
+                </div>
+                <ul>
+                  <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/educacao_fisica_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
+                  <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/educacao_fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
+                </ul>
+              </li>
+              <li class="nested-sidebar-item sidebar-item">
+                <div class="sidebar-button" data-main-src="disciplinas/artes.html">
+                  Artes <span>+</span>
+                </div>
+                <ul>
+                  <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/artes_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
+                  <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/artes_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -101,21 +102,33 @@
   </div>
 
   <script>
-    // Toggle menu e carregar página da disciplina
+    // Permite apenas uma aba aberta por vez
     document.querySelectorAll('.sidebar-button').forEach(btn => {
       btn.addEventListener('click', () => {
         const parent = btn.parentElement;
-        parent.classList.toggle('active');
-        const symbol = btn.querySelector('span');
-        symbol.textContent = parent.classList.contains('active') ? '-' : '+';
+        const isActive = parent.classList.contains('active');
 
+        // Fecha todas as abas
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+          item.classList.remove('active');
+          const span = item.querySelector('.sidebar-button span');
+          if(span) span.textContent = '+';
+        });
+
+        // Abre a aba clicada se estava fechada
+        if(!isActive){
+          parent.classList.add('active');
+          btn.querySelector('span').textContent = '-';
+        }
+
+        // Carrega a página principal da disciplina se houver
         const mainSrc = btn.dataset.mainSrc;
         if(mainSrc){
           fetch(mainSrc)
             .then(resp => resp.text())
             .then(html => {
               document.getElementById('conteudo').innerHTML = html;
-              MathJax.typesetPromise(); // Renderiza LaTeX do conteúdo carregado
+              MathJax.typesetPromise(); // renderiza LaTeX
             })
             .catch(err => {
               document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
@@ -140,7 +153,7 @@
             .then(res => res.text())
             .then(html => {
               document.getElementById('conteudo').innerHTML = html;
-              MathJax.typesetPromise(); // Renderiza LaTeX do conteúdo HTML
+              MathJax.typesetPromise(); // renderiza LaTeX
             })
             .catch(err => {
               document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">${title}</h2><p>Erro ao carregar o conteúdo.</p></div>`;

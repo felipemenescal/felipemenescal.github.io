@@ -19,16 +19,14 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    background: rgba(255,255,255,0.95);
+    background-color: #1E3A8A;
     padding: 1rem;
-  }
-
-  nav {
-    flex: 1;
     overflow-y: auto;
   }
 
-  .sidebar-title { font-size: 1.25rem; font-weight: 600; color: rgb(12,37,124); margin-top: 1rem; margin-bottom: 0.25rem; }
+  nav { flex: 1; }
+
+  .sidebar-title { font-size: 1.25rem; font-weight: 600; color: #FFFFFF; margin-top: 1rem; margin-bottom: 0.25rem; }
   .sidebar-item { display: flex; flex-direction: column; }
   .sidebar-button {
     width: 100%;
@@ -36,16 +34,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     border-radius: 0.25rem;
     font-size: 1rem;
     font-weight: 600;
-    color: rgb(12,37,124);
+    color: #FFFFFF;
     cursor: pointer;
     background: transparent;
     border: none;
   }
-  .sidebar-button:hover { background-color: #e0e7ff; }
+  .sidebar-button:hover { background-color: #3B82F6; }
   .sidebar-item ul {
     display: none;
     flex-direction: column;
@@ -53,10 +51,10 @@
     margin: 0;
   }
   .sidebar-item.active > ul { display: flex; }
-  .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: rgb(12,37,124); text-decoration: none; }
-  .sidebar-link:hover { background-color: #f1f5f9; }
+  .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: #FFFFFF; text-decoration: none; padding-left: 1rem; }
+  .sidebar-link:hover { background-color: #2563EB; }
 
-  main { flex: 1; padding: 1.5rem; overflow-y: auto; min-width: 0; }
+  main { flex: 1; padding: 1.5rem; overflow-y: auto; min-width: 0; background-color: #F1F5F9; }
   .content-box { padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
   .content-box h2 { font-size:1.75rem; font-weight:600; margin-bottom:1rem; }
 </style>
@@ -119,7 +117,6 @@
 </div>
 
 <script>
-  // Accordion sidebar
   document.querySelectorAll('.sidebar-button').forEach(btn => {
     btn.addEventListener('click', () => {
       const parent = btn.parentElement;
@@ -133,8 +130,6 @@
         parent.classList.add('active');
         btn.querySelector('span').textContent = '-';
       }
-
-      // Load main HTML content
       const mainSrc = btn.dataset.mainSrc;
       if(mainSrc){
         fetch(mainSrc).then(resp => resp.text()).then(html => {
@@ -147,7 +142,6 @@
     });
   });
 
-  // Links PDF/HTML
   document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();

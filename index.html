@@ -21,6 +21,9 @@
     background-color: #1E3A8A;
     padding: 1rem;
     overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    white-space: nowrap;
   }
 
   main {
@@ -44,13 +47,39 @@
   .sidebar-title, .sidebar-button, .sidebar-link { color: #fff; }
   .sidebar-title { font-size: 1.25rem; font-weight: 600; margin: 0.5rem 0 0.25rem 0; }
 
-  .sidebar-button { display: flex; justify-content: space-between; align-items: center; background: transparent; border: none; width: 100%; cursor: pointer; font-weight: 600; font-size: 1rem; border-radius: 0.25rem; box-sizing: border-box; }
+  .sidebar-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+  }
   .sidebar-button:hover { background-color: #3B82F6; }
   .sidebar-button-icon { margin-left: auto; }
 
-  .sidebar-item ul { display: none; width: 100%; box-sizing: border-box; }
+  .sidebar-item ul {
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
   .sidebar-item.active > ul { display: block; }
-  .sidebar-link { display: block; text-decoration: none; border-radius: 0.25rem; padding: 0.3rem 0; font-size: 1rem; width: 100%; box-sizing: border-box; }
+  .sidebar-link {
+    display: block;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    padding: 0.3rem 0;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+  }
   .sidebar-link:hover { background-color: #2563EB; }
 
   .content-box { padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1); }

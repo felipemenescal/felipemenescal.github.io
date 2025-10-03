@@ -11,8 +11,9 @@
     body { font-family: Helvetica, Arial, sans-serif; }
     h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); }
     .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); }
-    .sidebar-item ul { display: none; margin: 0; padding: 0; }
+    .sidebar-item ul { display: none; margin: 0; padding-left: 0.5rem; } /* mantém indentação */
     .sidebar-item.active > ul { display: block; }
+    .sidebar-item.active > .sidebar-button { background-color: #e0e7ff; border-radius: 0.25rem; } /* mantém aparência consistente */
     .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; }
     .sidebar-button:hover { background-color: #e0e7ff; }
     .sidebar-title { font-size: 1.25rem; font-weight: 600; color: rgb(12,37,124); margin-top: 1rem; margin-bottom: 0.25rem; font-family: 'Poppins', Helvetica, Arial, sans-serif; }
@@ -30,7 +31,6 @@
     <nav>
       <ul class="space-y-2">
 
-        <!-- Disciplinas normais -->
         <li class="sidebar-item">
           <div class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span>+</span></div>
           <ul>
@@ -55,7 +55,6 @@
           </ul>
         </li>
 
-        <!-- Aba "Outros" -->
         <div class="sidebar-title">Outros</div>
         <li class="sidebar-item">
           <div class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span>+</span></div>
@@ -76,7 +75,6 @@
     </nav>
   </aside>
 
-  <!-- Main Content -->
   <main class="flex-1 p-6 overflow-y-auto">
     <header class="mb-6">
       <h1 class="text-3xl font-bold">Portal de Aulas</h1>

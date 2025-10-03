@@ -4,67 +4,67 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Portal de Aulas</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
-    body { font-family: Helvetica, Arial, sans-serif; }
-    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); }
-    aside { width: 16rem; flex-shrink: 0; height: 100vh; display: flex; flex-direction: column; background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); padding: 1rem; }
-    nav { flex: 1; overflow-y: auto; }
-    .sidebar-title { font-size: 1.25rem; font-weight: 600; color: rgb(12,37,124); margin-top: 1rem; margin-bottom: 0.25rem; font-family: 'Poppins', Helvetica, Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); margin: 0; }
+    aside { width: 16rem; flex-shrink: 0; height: 100vh; display: flex; flex-direction: column; background: rgba(255,255,255,0.95); padding: 1rem; overflow-y: auto; }
+    nav { flex: 1; }
+    .sidebar-title { font-size: 1.25rem; font-weight: 600; color: rgb(12,37,124); margin-top: 1rem; margin-bottom: 0.25rem; }
     .sidebar-item { display: flex; flex-direction: column; }
-    .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; background: transparent; }
+    .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; background: transparent; border: none; }
     .sidebar-button:hover { background-color: #e0e7ff; }
     .sidebar-item ul { display: none; flex-direction: column; padding-left: 1rem; margin: 0; }
     .sidebar-item.active > ul { display: flex; }
-    .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: rgb(12,37,124); }
+    .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: rgb(12,37,124); text-decoration: none; }
     .sidebar-link:hover { background-color: #f1f5f9; }
     main { flex: 1; padding: 1.5rem; overflow-y: auto; }
+    .container { display: flex; height: 100vh; }
   </style>
 </head>
-<body class="bg-gradient-to-b from-slate-50 to-slate-100 text-slate-800">
+<body>
 
-<div class="flex h-screen">
-  <!-- Sidebar -->
+<div class="container">
   <aside>
     <div class="sidebar-title">Disciplinas</div>
     <nav>
-      <ul class="space-y-2">
+      <ul>
         <li class="sidebar-item">
-          <div class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span>+</span></div>
+          <button class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span>+</span></button>
           <ul>
-            <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
-            <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/matematica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
+            <li><a class="sidebar-link" href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 - Introdução (PDF)</a></li>
+            <li><a class="sidebar-link" href="conteudos/matematica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
         <li class="sidebar-item">
-          <div class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span>+</span></div>
+          <button class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span>+</span></button>
           <ul>
-            <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/fisica_aula1.pdf">Aula 1 - Cinemática (PDF)</a></li>
-            <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
+            <li><a class="sidebar-link" href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 - Cinemática (PDF)</a></li>
+            <li><a class="sidebar-link" href="conteudos/fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
         <li class="sidebar-item">
-          <div class="sidebar-button" data-main-src="disciplinas/historia.html">História <span>+</span></div>
+          <button class="sidebar-button" data-main-src="disciplinas/historia.html">História <span>+</span></button>
           <ul>
-            <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/historia_medieval.pdf">Idade Média (PDF)</a></li>
-            <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/historia_renascimento.html">Renascimento (HTML)</a></li>
+            <li><a class="sidebar-link" href="arquivos/historia_medieval.pdf" target="_blank">Idade Média (PDF)</a></li>
+            <li><a class="sidebar-link" href="conteudos/historia_renascimento.html">Renascimento (HTML)</a></li>
           </ul>
         </li>
         <div class="sidebar-title">Outros</div>
         <li class="sidebar-item">
-          <div class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span>+</span></div>
+          <button class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span>+</span></button>
           <ul>
-            <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/educacao_fisica_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
-            <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/educacao_fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
+            <li><a class="sidebar-link" href="arquivos/educacao_fisica_aula1.pdf" target="_blank">Aula 1 - Introdução (PDF)</a></li>
+            <li><a class="sidebar-link" href="conteudos/educacao_fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
         <li class="sidebar-item">
-          <div class="sidebar-button" data-main-src="disciplinas/artes.html">Artes <span>+</span></div>
+          <button class="sidebar-button" data-main-src="disciplinas/artes.html">Artes <span>+</span></button>
           <ul>
-            <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/artes_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
-            <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/artes_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
+            <li><a class="sidebar-link" href="arquivos/artes_aula1.pdf" target="_blank">Aula 1 - Introdução (PDF)</a></li>
+            <li><a class="sidebar-link" href="conteudos/artes_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
       </ul>
@@ -76,10 +76,10 @@
       <h1 class="text-3xl font-bold">Portal de Aulas</h1>
       <p class="text-slate-600">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>
     </header>
-    <section id="conteudo" class="space-y-6">
-      <div class="p-6 bg-white rounded-2xl shadow">
-        <h2 class="text-2xl font-semibold mb-4">Bem-vindo</h2>
-        <p class="text-slate-700">Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
+    <section id="conteudo">
+      <div style="padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        <h2 style="font-size:1.75rem; font-weight:600; margin-bottom:1rem;">Bem-vindo</h2>
+        <p>Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
       </div>
     </section>
   </main>
@@ -105,7 +105,7 @@
           document.getElementById('conteudo').innerHTML = html;
           MathJax.typesetPromise();
         }).catch(() => {
-          document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
+          document.getElementById('conteudo').innerHTML = `<div style="padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1);"><h2 style="font-size:1.75rem; font-weight:600; margin-bottom:1rem;">Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
         });
       }
     });
@@ -123,7 +123,7 @@
           document.getElementById('conteudo').innerHTML = html;
           MathJax.typesetPromise();
         }).catch(() => {
-          document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">${title}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
+          document.getElementById('conteudo').innerHTML = `<div style="padding:1.5rem; background:white; border-radius:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.1);"><h2 style="font-size:1.75rem; font-weight:600; margin-bottom:1rem;">${title}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
         });
       }
     });

@@ -10,35 +10,27 @@
   <style>
     body { font-family: Helvetica, Arial, sans-serif; }
     h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: rgb(12,37,124); }
-    aside { width: 16rem; display: flex; flex-direction: column; height: 100vh; }
-    .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); display: flex; flex-direction: column; }
-    nav { flex: 1; overflow-y: auto; }
-    .sidebar-item ul {
-      display: none; /* escondido por padrão */
-      padding-left: 1rem;
-      margin: 0;
-    }
-    .sidebar-item.active > ul {
-      display: block; /* apenas exibe sem alterar largura ou padding */
-    }
-    .sidebar-item.active > .sidebar-button { background-color: #e0e7ff; border-radius: 0.25rem; }
-    .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; }
-    .sidebar-button:hover { background-color: #e0e7ff; }
+    aside { width: 16rem; flex-shrink: 0; height: 100vh; display: flex; flex-direction: column; background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); padding: 1rem; }
+    nav { flex: 1; overflow-y: auto; position: relative; }
     .sidebar-title { font-size: 1.25rem; font-weight: 600; color: rgb(12,37,124); margin-top: 1rem; margin-bottom: 0.25rem; font-family: 'Poppins', Helvetica, Arial, sans-serif; }
+    .sidebar-item { position: relative; }
+    .sidebar-button { width: 100%; text-left; display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; border-radius: 0.25rem; font-size: 1rem; font-weight: 600; color: rgb(12,37,124); cursor: pointer; background: transparent; }
+    .sidebar-button:hover { background-color: #e0e7ff; }
+    .sidebar-item ul { display: none; position: absolute; top: 0; left: 100%; background: rgba(255,255,255,0.95); box-shadow: 0 0 8px rgba(0,0,0,0.1); padding-left: 0.5rem; min-width: 14rem; z-index: 50; }
+    .sidebar-item.active > ul { display: block; }
     .sidebar-link { display: block; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer; font-size: 1rem; color: rgb(12,37,124); }
     .sidebar-link:hover { background-color: #f1f5f9; }
-    .nested-sidebar-item { padding-left: 1rem; }
+    main { flex: 1; padding: 1.5rem; overflow-y: auto; }
   </style>
 </head>
-<body class="bg-gradient-to-b from-slate-50 to-slate-100 min-h-screen text-slate-800">
+<body class="bg-gradient-to-b from-slate-50 to-slate-100 text-slate-800">
 
 <div class="flex h-screen">
   <!-- Sidebar -->
-  <aside class="glass p-4 shadow-lg">
+  <aside>
     <div class="sidebar-title">Disciplinas</div>
     <nav>
       <ul class="space-y-2">
-
         <li class="sidebar-item">
           <div class="sidebar-button" data-main-src="disciplinas/matematica.html">Matemática <span>+</span></div>
           <ul>
@@ -46,7 +38,6 @@
             <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/matematica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
-
         <li class="sidebar-item">
           <div class="sidebar-button" data-main-src="disciplinas/fisica.html">Física <span>+</span></div>
           <ul>
@@ -54,7 +45,6 @@
             <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/fisica_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
-
         <li class="sidebar-item">
           <div class="sidebar-button" data-main-src="disciplinas/historia.html">História <span>+</span></div>
           <ul>
@@ -62,7 +52,6 @@
             <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/historia_renascimento.html">Renascimento (HTML)</a></li>
           </ul>
         </li>
-
         <div class="sidebar-title">Outros</div>
         <li class="sidebar-item">
           <div class="sidebar-button" data-main-src="disciplinas/educacao_fisica.html">Educação Física <span>+</span></div>
@@ -78,12 +67,11 @@
             <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/artes_exemplo.html">Aula 2 - Exercícios (HTML)</a></li>
           </ul>
         </li>
-
       </ul>
     </nav>
   </aside>
 
-  <main class="flex-1 p-6 overflow-y-auto">
+  <main>
     <header class="mb-6">
       <h1 class="text-3xl font-bold">Portal de Aulas</h1>
       <p class="text-slate-600">Acesse conteúdos, arquivos e notas de aula de cada disciplina.</p>

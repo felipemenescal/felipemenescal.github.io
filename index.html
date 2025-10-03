@@ -6,9 +6,11 @@
   <title>Portal de Aulas</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <!-- MathJax para renderizar LaTeX -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body { font-family: Helvetica, Arial, sans-serif; }
-    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: #4338ca; }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: #000000; }
     .glass { background: rgba(255,255,255,0.85); backdrop-filter: blur(6px); }
     .sidebar-item ul { display: none; }
     .sidebar-item.active ul { display: block; }
@@ -27,8 +29,8 @@
       <nav>
         <ul id="disciplinasMenu" class="space-y-2">
           <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fisica1/fisica1.html">
-              Física Básica 1 <span>+</span>
+            <div class="sidebar-button" data-main-src="fisexp1/fisexp1.html">
+              Matemática <span>+</span>
             </div>
             <ul>
               <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/matematica_aula1.pdf">Aula 1 - Introdução (PDF)</a></li>
@@ -36,8 +38,8 @@
             </ul>
           </li>
           <li class="sidebar-item">
-            <div class="sidebar-button" data-main-src="fisexp1/fisexp1.html">
-              Física Experimental I <span>+</span>
+            <div class="sidebar-button" data-main-src="fisica1/fisica1.html">
+              Física <span>+</span>
             </div>
             <ul>
               <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/fisica_aula1.pdf">Aula 1 - Cinemática (PDF)</a></li>
@@ -46,10 +48,10 @@
           </li>
           <li class="sidebar-item">
             <div class="sidebar-button" data-main-src="fiscomp/fiscomp.html">
-              Física Computacional <span>+</span>
+              História <span>+</span>
             </div>
             <ul>
-              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="fiscomp/pt2.pdf">Idade Média (PDF)</a></li>
+              <li><a class="sidebar-link" href="#" data-type="pdf" data-src="arquivos/historia_medieval.pdf">Idade Média (PDF)</a></li>
               <li><a class="sidebar-link" href="#" data-type="html" data-src="conteudos/historia_renascimento.html">Renascimento (HTML)</a></li>
             </ul>
           </li>
@@ -66,7 +68,7 @@
       <section id="conteudo" class="space-y-6">
         <div class="p-6 bg-white rounded-2xl shadow">
           <h2 class="text-2xl font-semibold mb-4">Bem-vindo</h2>
-          <p class="text-slate-700">Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações e notas de aula.</p>
+          <p class="text-slate-700">Selecione uma disciplina na barra lateral para visualizar os conteúdos correspondentes. Este portal é atualizado pelo professor e disponibiliza materiais como arquivos PDF, apresentações, notas de aula e fórmulas matemáticas em LaTeX.</p>
         </div>
       </section>
     </main>
@@ -85,7 +87,10 @@
         if(mainSrc){
           fetch(mainSrc)
             .then(resp => resp.text())
-            .then(html => { document.getElementById('conteudo').innerHTML = html; })
+            .then(html => {
+              document.getElementById('conteudo').innerHTML = html;
+              MathJax.typesetPromise(); // Renderiza LaTeX do conteúdo carregado
+            })
             .catch(err => {
               document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">Erro</h2><p>Não foi possível carregar a página da disciplina.</p></div>`;
             });
@@ -107,7 +112,10 @@
         } else if(type === 'html'){
           fetch(src)
             .then(res => res.text())
-            .then(html => { document.getElementById('conteudo').innerHTML = html; })
+            .then(html => {
+              document.getElementById('conteudo').innerHTML = html;
+              MathJax.typesetPromise(); // Renderiza LaTeX do conteúdo HTML
+            })
             .catch(err => {
               document.getElementById('conteudo').innerHTML = `<div class="p-6 bg-white rounded-2xl shadow"><h2 class="text-2xl font-semibold mb-4">${title}</h2><p>Erro ao carregar o conteúdo.</p></div>`;
             });

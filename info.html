@@ -4,16 +4,34 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>História</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
 body { font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
 h1, h2, h3, h4, h5, h6 { font-family: Helvetica, Arial, sans-serif; color: #000000; }
 
-/* 🔴 Forçar remoção de bullets e indentação */
 ul {
-  list-style-type: none !important;
+  list-style: none !important;
   padding-left: 0 !important;
   margin-left: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+  color: #1e40af; /* indigo-600 */
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+}
+a:hover {
+  color: #1e3a8a;
+}
+.icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
 }
 </style>
 </head>
@@ -21,21 +39,49 @@ ul {
 <div class="max-w-4xl mx-auto space-y-6">
 
   <h2 class="text-3xl font-bold">Informações</h2>
-  <p class="text-slate-700"><br>Bem-vindo à disciplina de História! Aqui você encontrará todos os conteúdos, exercícios e materiais de apoio.<br></p>
+  <p class="text-slate-700">Bem-vindo à disciplina de História! Aqui você encontrará todos os conteúdos, exercícios e materiais de apoio.</p>
 
   <div class="p-6 bg-white rounded-2xl shadow space-y-3">
     <h3 class="text-2xl font-semibold">Links úteis</h3>
     <ul>
-      <li><a href="arquivos/historia_medieval.pdf" target="_blank" class="text-indigo-600">Idade Média (PDF)</a></li>
-      <li><a href="arquivos/historia_medieval.pdf" target="_blank" class="text-indigo-600">Idade Média (PDF)</a></li>
+      <li>
+        <a href="arquivos/historia_medieval.pdf" target="_blank">
+          <i data-lucide="file-text" class="icon"></i> Idade Média (PDF)
+        </a>
+      </li>
+      <li>
+        <a href="arquivos/historia_moderna.html" target="_blank">
+          <i data-lucide="globe" class="icon"></i> Idade Moderna (Página)
+        </a>
+      </li>
+      <li>
+        <a href="videos/aula1.mp4" target="_blank">
+          <i data-lucide="video" class="icon"></i> Aula em Vídeo
+        </a>
+      </li>
+      <li>
+        <a href="arquivos/fontes_hist.zip" target="_blank">
+          <i data-lucide="archive" class="icon"></i> Fontes primárias (ZIP)
+        </a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+          <i data-lucide="youtube" class="icon"></i> Documentário no YouTube
+        </a>
+      </li>
     </ul>
   </div>
 
   <div class="p-6 bg-white rounded-2xl shadow space-y-3">
     <h3 class="text-2xl font-semibold">Descrição</h3>
-    <p class="text-slate-700"><br>Nesta disciplina, exploraremos eventos históricos importantes, desde a Idade Média até o Renascimento, com materiais em PDF e páginas HTML para estudo detalhado.</p>
+    <p class="text-slate-700">Nesta disciplina, exploraremos eventos históricos importantes, desde a Idade Média até o Renascimento, com materiais em PDF, vídeos e páginas HTML para estudo detalhado.</p>
   </div>
 
 </div>
+
+<script>
+  // Ativa os ícones Lucide automaticamente
+  lucide.createIcons();
+</script>
 </body>
 </html>

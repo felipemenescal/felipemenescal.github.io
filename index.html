@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/x-icon" href="logo.ico">
+<title>Portal de Aulas</title>
+
+<!-- Fonte -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html,body { height: 100%; }
+  body { font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+
+  .app {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* SIDEBAR */
+  aside {
+    width: 16rem;
+    min-width: 16rem;
+    flex: 0 0 16rem;
+    background: #11307A;
+    color: #fff;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-scroll {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.25rem;
+  }
+
+  .sidebar-title { font-weight: 700; margin: 0.5rem 0; color: #fff; }
+  .sidebar-item { margin: 0.25rem 0; }
+  .sidebar-scroll ul, .sidebar-scroll li { list-style: none; margin: 0; padding: 0; }
+
+  .sidebar-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.45rem 0.25rem;
+    text-align: left;
+    border-radius: 6px;
+    transition: background .12s;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .sidebar-button:hover { background: rgba(255,255,255,0.06); }
+  .sidebar-button .label { flex: 1 1 auto; min-width: 0; white-space: normal; word-break: break-word; }
+  .sidebar-button .icon { flex: 0 0 1.25rem; text-align: center; }
+
+  .submenu {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .28s ease;
+    padding-left: 0.5rem;
+  }
+  .sidebar-item.open > .submenu { max-height: 30rem; }
+
+  .submenu a {
+    display: block;
+    padding: 0.35rem 0.25rem;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  .submenu a:hover { background: rgba(255,255,255,0.06); }
+
+  /* Logo no rodapé */
+  .sidebar-logo {
+    margin-top: auto;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar-logo img {
+    max-width: 120px;
+    height: auto;
+    opacity: 0.9;
+  }
+
+  /* Main */
+  main {
+    flex: 1 1 auto;
+    min-width: 0;
+    background: #f3f6fb;
+    padding: 1.25rem;
+    overflow: auto;
+  }
+  .content-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 20px rgba(6,30,60,0.08);
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <div class="sidebar-scroll">
+        <div class="sidebar-title">Disciplinas</div>
+        <ul>
+         
+          <li class="sidebar-item" id="item-matematica">
+            <button class="sidebar-button" data-main="fisexp1/fisexp1.html" aria-expanded="false">
+              <span class="label">Física Experimental I</span>
+              <span class="icon">+</span>
+            </button>
+           <!--
+            <div class="submenu">
+              <a href="arquivos/matematica_aula1.pdf" target="_blank">Aula 1 — PDF</a>
+              <a href="conteudos/matematica_exemplo.html">Aula 2 — HTML</a>
+            </div> -->
+          </li>
+
+          <li class="sidebar-item" id="item-fisica">
+            <button class="sidebar-button" data-main="fisica1/fisica1.html" aria-expanded="false">
+              <span class="label">Física I</span>
+              <span class="icon">+</span>
+            </button>
+            <!-- <div class="submenu">
+              <a href="arquivos/fisica_aula1.pdf" target="_blank">Aula 1 — PDF</a>
+            </div> -->
+          </li>
+
+          <li class="sidebar-item" id="item-fisica">
+            <button class="sidebar-button" data-main="fiscomp/fiscomp.html" aria-expanded="false">
+              <span class="label">Física Computacional</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="submenu">
+              <a href="fiscomp/pt2.pdf" target="_blank">Mini Projeto 2</a>
+            </div>
+          </li>
+         
+        </ul>
+
+        <div class="sidebar-title">Outros</div>
+        <ul>
+         
+          <li class="sidebar-item" id="item-artes">
+            <button class="sidebar-button" data-main="ferramentas.html" aria-expanded="false">
+              <span class="label">Ferramentas</span>
+              <span class="icon">+</span>
+            </button>
+            <!-- 
+            <div class="submenu">
+              <a href="conteudos/artes_exemplo.html">Conteúdo — HTML</a>
+            </div> -->
+          </li>
+
+          <li class="sidebar-item" id="item-artes">
+            <button class="sidebar-button" data-main="recursos.html" aria-expanded="false">
+              <span class="label">Recursos</span>
+              <span class="icon">+</span>
+            </button>
+            <!-- 
+            <div class="submenu"> mesma identacao de button
+              <a href="conteudos/artes_exemplo.html">Conteúdo — HTML</a>
+            </div> -->
+          </li>
+
+          <li class="sidebar-item" id="item-artes">
+            <button class="sidebar-button" data-main="info.html" aria-expanded="false">
+              <span class="label">Informações</span>
+              <span class="icon">+</span>
+            </button>
+            <!-- 
+            <div class="submenu">
+              <a href="conteudos/artes_exemplo.html">Conteúdo — HTML</a>
+            </div> -->
+          </li>
+         
+        </ul>
+      </div>
+
+      <!-- Logo no rodapé -->
+      <div class="sidebar-logo">
+        <img src="ufrn.png" alt="Logo da instituição">
+      </div>
+    </aside>
+
+    <main>
+      <section id="main-content" class="content-card" aria-live="polite">
+        <h2>Portal de Aulas</h2>
+        <br>
+        <p>Selecione uma disciplina na barra lateral para abrir a página ou conteúdo correspondente.</p>
+      </section>
+    </main>
+  </div>
+
+<script>
+(function () {
+  const items = document.querySelectorAll('.sidebar-item');
+  function closeAll() {
+    items.forEach(it => {
+      it.classList.remove('open');
+      const btn = it.querySelector('.sidebar-button');
+      if (btn) { btn.setAttribute('aria-expanded', 'false'); const ic = btn.querySelector('.icon'); if(ic) ic.textContent = '+'; }
+    });
+  }
+  items.forEach(it => {
+    const btn = it.querySelector('.sidebar-button');
+    if (!btn) return;
+    btn.addEventListener('click', async () => {
+      const isOpen = it.classList.contains('open');
+      closeAll();
+      if (!isOpen) {
+        it.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        const ic = btn.querySelector('.icon'); if(ic) ic.textContent = '-';
+      }
+      const mainPath = btn.getAttribute('data-main');
+      if (mainPath) {
+        try {
+          const res = await fetch(mainPath);
+          if (!res.ok) throw new Error('fetch_error');
+          const html = await res.text();
+          document.getElementById('main-content').innerHTML = html;
+          if (window.MathJax && window.MathJax.typesetPromise) { window.MathJax.typesetPromise(); }
+        } catch {
+          document.getElementById('main-content').innerHTML = '<h2>Erro</h2><p>Não foi possível carregar a página da disciplina.</p>';
+        }
+      }
+    });
+  });
+  document.querySelectorAll('.submenu a').forEach(a => {
+    a.addEventListener('click', async (e) => {
+      const href = a.getAttribute('href') || '';
+      if (href.toLowerCase().endsWith('.pdf')) return;
+      e.preventDefault();
+      try {
+        const res = await fetch(href);
+        if (!res.ok) throw new Error('fetch_error');
+        const html = await res.text();
+        document.getElementById('main-content').innerHTML = html;
+        if (window.MathJax && window.MathJax.typesetPromise) { window.MathJax.typesetPromise(); }
+      } catch {
+        document.getElementById('main-content').innerHTML = `<h2>Erro</h2><p>Erro ao carregar o conteúdo: ${a.textContent}</p>`;
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

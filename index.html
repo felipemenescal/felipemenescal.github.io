@@ -11,9 +11,26 @@
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html,body { height: 100%; }
-  body { font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+/* ===============================
+   🔹 Fonte Trebuchet MS hospedada localmente
+   Certifique-se de que os arquivos estejam em:
+   /fonts/trebuchet-ms.woff2 e /fonts/trebuchet-ms.woff
+   =============================== */
+@font-face {
+  font-family: "TrebuchetMS-Web";
+  src: url("fonts/trebuchet-ms.woff2") format("woff2"),
+       url("fonts/trebuchet-ms.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 🔹 Aplicar globalmente a fonte */
+html, body, h1, h2, h3, h4, h5, h6, p, a, li {
+  font-family: "TrebuchetMS-Web", "Trebuchet MS", "Trebuchet", Verdana, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
   .app {
     display: flex;

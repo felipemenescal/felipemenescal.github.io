@@ -2,35 +2,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Física</title>
+<title>Física Computacional 1</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
 <style>
 body { font-family: Helvetica, Arial, sans-serif; }
-h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', Helvetica, Arial, sans-serif; color: #000000; }
+h1, h2, h3, h4, h5, h6 { font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing:antialiased; }
+
+/* 🔴 Forçar remoção de bullets e indentação */
+ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* 🔴 Forçar links sem sublinhado */
+a {
+  text-decoration: none !important;
+}
+
+/* Estilização dos links */
+a {
+  color: #1e40af; /* Tailwind text-indigo-600 */
+  font-weight: 500;
+}
+a:hover {
+  color: #1e3a8a; /* tom mais escuro no hover */
+}
+  
 </style>
 </head>
 <body class="bg-slate-50 text-slate-800 p-6">
 <div class="max-w-4xl mx-auto space-y-6">
-<h2 class="text-3xl font-bold">Física Computacional</h2>
-<p class="text-slate-700">Bem-vindo à disciplina de Física! Aqui você encontrará todos os conteúdos, exercícios e materiais de apoio.</p>
-<div class="p-6 bg-white rounded-2xl shadow space-y-3">
-<h3 class="text-2xl font-semibold">Links Úteis</h3>
-<ul class="list-disc list-inside text-slate-700">
-<li><a href="arquivos/fisica_aula1.pdf" target="_blank" class="text-indigo-600 hover:underline">Aula 1 - Cinemática (PDF)</a></li>
-<li><a href="conteudos/fisica_exemplo.html" class="text-indigo-600 hover:underline">Aula 2 - Exercícios (HTML)</a></li>
-</ul>
-</div>
-<div class="p-6 bg-white rounded-2xl shadow space-y-3">
-<h3 class="text-2xl font-semibold">Descrição</h3>
-<p class="text-slate-700">Nesta disciplina, abordaremos conceitos essenciais da Física, como movimento, forças, energia e leis fundamentais, com materiais de estudo em PDF e HTML.</p>
-<p>Área de um círculo: \( A = \pi r^2 \)</p>
-<p>Equação quadrática:</p>
-\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
-<p>Derivada de uma função:</p>
-\[ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \]
-</div>
+
+  <h1 class="text-3xl font-bold">Física Computacional 1</h1>
+  <p class="text-slate-700"><br>Bem-vindo à disciplina de Física Experimental 1! Este espaço é dedicado ao compartilhamento dos materiais relevantes da disciplina bem como as referências utilizadas na elaboração do curso.<br></p>
+  <p class="text-slate-700"><br></p>
+  <div class="p-6 bg-white rounded-2xl shadow space-y-3">
+    <h3 class="text-2xl font-semibold">Links úteis</h3>
+    <ul>
+      <p class="text-slate-700"><br></p>
+      <li><a href="arquivos/historia_medieval.pdf" target="_blank">Idade Média (PDF)</a></li>
+      <li><a href="arquivos/historia_moderna.pdf" target="_blank">Idade Moderna (PDF)</a></li>
+      <p class="text-slate-700"><br></p>
+    </ul>
+  </div>
+
+  <div class="p-6 bg-white rounded-2xl shadow space-y-3">
+    <h3 class="text-2xl font-semibold">Descrição</h3>
+    <p class="text-slate-700"><br>Nesta disciplina, exploraremos eventos históricos importantes, desde a Idade Média até o Renascimento, com materiais em PDF e páginas HTML para estudo detalhado.</p>
+    <p>Área de um círculo: \( A = \pi r^2 \)</p>
+    <p>Equação quadrática:</p>
+    \[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]
+    <p>Derivada de uma função:</p>
+    \[ f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h} \]
+  </div>
+
 </div>
 </body>
 </html>
-
